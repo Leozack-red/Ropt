@@ -10,9 +10,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: bundle lock --add-platform x86_64-linux
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
+      - uses: bundle lock --add-platform x86_64-linux
         with:
           ruby-version: 3.2.2
           bundler-cache: true
