@@ -10,4 +10,5 @@ module Ropt
   require_relative "ropt/antagonistic_games/matrix_game"
   require_relative "ropt/cooperative_games/coalitions_coefficients"
   require_relative "ropt/cooperative_games/shapley_value"
+  require_relative "ropt/cooperative_games/validator"
 end

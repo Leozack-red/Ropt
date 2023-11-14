@@ -5,62 +5,52 @@ RSpec.describe Ropt::AntagonisticGames::MatrixGame do
 
   let(:strategies) { [[0, 23, 2, 423, 34, 4, 2], [55, 7, 10, 13, 434, 3434, 34], [5, 7, 10, 3, 44, 334, 34]] }
 
-  describe "#result" do
-    context "with strategies and no report" do
-      let(:result) { matrix_game.result }
+  describe "#solve" do
+    let(:result) { matrix_game.solve }
 
-      it "contains calculations first strategy" do
-        expect(result[:first_strategy]).to match_array strategies[1]
+    context "when game without equilibrium" do
+      it "returns first gamer optimal strategy" do
+        expect(result[:first_gamer_optimal_strategy]).to match_array strategies[1]
       end
 
-      it "contains calculations second strategy" do
-        expect(result[:second_strategy]).to contain_exactly(2, 10, 10)
+      it "returns second gamer optimal strategy" do
+        expect(result[:second_gamer_optimal_strategy]).to contain_exactly(2, 10, 10)
       end
 
-      it "contains calculations lower value" do
+      it "returns lower value" do
         expect(result[:lower_value]).to eq 7
       end
 
-      it "contains calculations higher value" do
+      it "returns higher value" do
         expect(result[:higher_value]).to eq 10
       end
 
-      it "contains calculations the disequilibrium" do
+      it "returns the disequilibrium" do
         expect(result[:equilibrium]).to be_falsy
       end
     end
 
-    context "with strategies for equilibrium and no report" do
-      let(:result) { matrix_game.result }
-
+    context "when game with equilibrium" do
       let(:strategies) { [[2, 1], [2, 0]] }
 
-      it "contains calculations first strategy" do
-        expect(result[:first_strategy]).to match_array strategies[0]
+      it "returns first gamer optimal strategy" do
+        expect(result[:first_gamer_optimal_strategy]).to match_array strategies[0]
       end
 
-      it "contains calculations second strategy" do
-        expect(result[:second_strategy]).to contain_exactly(1, 0)
+      it "returns second gamer optimal strategy" do
+        expect(result[:second_gamer_optimal_strategy]).to contain_exactly(1, 0)
       end
 
-      it "contains calculations lower value" do
+      it "returns lower value" do
         expect(result[:lower_value]).to eq 1
       end
 
-      it "contains calculations higher value" do
+      it "returns higher value" do
         expect(result[:higher_value]).to eq 1
       end
 
-      it "contains calculations the equilibrium" do
+      it "returns the equilibrium" do
         expect(result[:equilibrium]).to be_truthy
-      end
-    end
-
-    context "with strategies and report" do
-      let(:result) { matrix_game.result(report: true) }
-
-      it "contains calculations optimal strategies and string report message" do
-        expect(result).to be_a(String)
       end
     end
   end
