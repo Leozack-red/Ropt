@@ -18,6 +18,5 @@ jobs:
         with:
           ruby-version: 3.2.2
           bundler-cache: true
-        run: bundle lock --add-platform x86_64-linux
       - name: Run tests
         run: bundle exec rspec
