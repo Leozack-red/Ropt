@@ -137,6 +137,7 @@ DEPENDENCIES
   rubocop-rake
   rubocop-rspec
   rubycritic
+  simplecov
 
 BUNDLED WITH
    2.4.10
