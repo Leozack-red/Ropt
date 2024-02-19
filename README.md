@@ -14,7 +14,7 @@ Adding to a gem:
 
 Or adding to your project:
 
-`gem "ropt", "~> 0.1.0"`
+`gem "ropt", "~> 1.0"`
 
 Run bundle install: 
 
