@@ -1,34 +1,81 @@
 # Ropt
 
-TODO: Delete this and the text below, and describe your gem
+The library for mathematical optimization in Ruby is designed to help solve many problems in the computational, financial, social, and energy fields and, in theory, should include components of game theory, combinatorics, probability theory, linear and nonlinear optimization, cluster, regression, and other analysis.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/ropt`. To experiment with that code, run `bin/console` for an interactive prompt.
+At the moment, it is a simple library for working with some types of [Antagonistic](https://en.wikipedia.org/wiki/Zero-sum_game) and [Cooperative](https://en.wikipedia.org/wiki/Cooperative_game_theory) Games described in game theory.
+Solvers have been written to calculate the lower and upper values of the [Matrix Game](https://en.wikipedia.org/wiki/Normal-form_game), indicating whether there is a Nash equilibrium.
+A solver for calculating the [Shapley Vector](https://en.wikipedia.org/wiki/Shapley_value) has been implemented for the cooperative part of game theory.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+Adding to a gem:
 
-Install the gem and add to the application's Gemfile by executing:
+`gem install ropt`
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+Or adding to your project:
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+`gem "ropt", "~> 0.1.0"`
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+Run bundle install: 
+
+`bundle install`
 
 ## Usage
 
-TODO: Write usage instructions here
+To call the matrix game solver, you need to do:
 
-## Development
+```
+strategies = [[2, 1], [2, 0]]
+Ropt::AntagonisticGames::MatrixGame.new(strategies).solve
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+In this example, the result will be:
+```
+{
+   :first_gamer_optimal_strategy=>[2, 1], 
+   :second_gamer_optimal_strategy=>[1, 0], 
+   :lower_value=>1, 
+   :higher_value=>1, 
+   :equilibrium=>true
+}
+```
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+For large arrays, there may be a memory limit, which leads to a slowdown in the operation of the method.
 
+Consider an example using a solver to calculate the Shapley Vector. 
+
+The call looks like this:
+```
+coalitions = {
+               B: 0,
+               A: 0,
+               AB: 1,
+               C: 0,
+               ABC: 1,
+               AC: 1 
+              }
+               
+number_gamers = 3
+
+Ropt::CooperativeGames::ShapleyValue.new(coalitions, number_gamers).solve
+```
+
+In this example, the result of Shapley Value will be:
+
+```
+{
+   :B=>0.167, 
+   :A=>0.667, 
+   :C=>0.167
+}
+```
+It is worth noting that coalitions and the number of gamers must be sent, otherwise a validation error will occur.
+If it is determined that the value of the grand coalition characteristic function is not equal to the sum of the components of the Shapley Vector, the solver will raise an exception.
+
+The constant defines an upper limit for the number of gamers, which is 171 gamers. Exceeding this number will result in an exception being raised.
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/ropt. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/ropt/blob/main/CODE_OF_CONDUCT.md).
+Bug reports and pull requests are welcome on GitHub at https://github.com/Leozack-red/ropt. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/ropt/blob/main/CODE_OF_CONDUCT.md).
 
 ## License
 

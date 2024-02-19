@@ -8,13 +8,14 @@ Gem::Specification.new do |spec|
   spec.authors = ["Lev Pruglo "]
   spec.email = ["lev.pruglo@mail.ru"]
 
-  spec.summary = ""
-  spec.description = ""
+  spec.summary = "Library for mathematical optimization"
+  spec.description = "The library for mathematical optimization in Ruby is designed to help solve many problems in the
+                      computational, financial, social, and energy fields and, in theory,
+                      should include components of game theory, combinatorics, probability theory,
+                      linear and nonlinear optimization, cluster, regression, and other analysis."
   spec.homepage = "https://github.com/Leozack-red"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.7.0"
-
-  spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = "https://github.com/Leozack-red/ropt"
