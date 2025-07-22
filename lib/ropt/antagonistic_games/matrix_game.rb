@@ -24,8 +24,8 @@ module Ropt
         {
           first_gamer_optimal_strategy: opt_strategy(:first),
           second_gamer_optimal_strategy: opt_strategy(:second),
-          lower_value:,
-          higher_value:,
+          lower_value: lower_value,
+          higher_value: higher_value,
           equilibrium: lower_value == higher_value
         }
       end
