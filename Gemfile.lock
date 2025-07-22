@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ropt (1.0.0)
+    ropt (1.0.1)
       matrix
 
 GEM
