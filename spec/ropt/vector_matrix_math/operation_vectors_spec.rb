@@ -8,7 +8,7 @@ RSpec.describe Ropt::VectorMatrixMath::OperationVectors do
       let(:first_vector) { [1, 2] }
       let(:second_vector) { [2, 3] }
 
-      it "will product" do
+      it "has calculate correct" do
         expect(vectors).to eq 8
       end
     end
@@ -17,7 +17,7 @@ RSpec.describe Ropt::VectorMatrixMath::OperationVectors do
       let(:first_vector) { [1.4, 2] }
       let(:second_vector) { [2, 3.9] }
 
-      it "will product" do
+      it "has calculate correct" do
         expect(vectors).to eq 10.6
       end
     end
